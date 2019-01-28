@@ -1,5 +1,5 @@
 <ng-container  *ngIf="term">
-  <div class="vintage_paper" [hidden]="!editing">
+  <div class="vintage_paper grid-container" [hidden]="!editing">
     <h1>Edition of term: {{ term.term }}</h1>
     <mat-form-field>
       <input matInput placeholder="Terme" [(ngModel)]="term.term" />

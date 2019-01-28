@@ -18,23 +18,26 @@
       </a>
     </mat-toolbar>
     <mat-nav-list>
+        <a mat-list-item [routerLink]="['./terms']" routerLinkActive="router-link-active">
+          <mat-icon>view_list</mat-icon>
+        <span>Glossaire</span></a>
       <a mat-list-item [routerLink]="['./new-term']" routerLinkActive="router-link-active">
         <mat-icon>add</mat-icon>
       <span>add term</span></a>
       <a mat-list-item  [routerLink]="['./library']" routerLinkActive="router-link-active">
-        <mat-icon>add</mat-icon>
+        <mat-icon>library_books</mat-icon>
       <span>Library</span></a>
       <a mat-list-item  [routerLink]="['./new-book']" routerLinkActive="router-link-active">
-        <mat-icon>add</mat-icon>
+        <mat-icon>library_add</mat-icon>
       <span>add book</span></a>
       <a mat-list-item  [routerLink]="['./people']" routerLinkActive="router-link-active">
-        <mat-icon>add</mat-icon>
+        <mat-icon>people</mat-icon>
       <span>Hall of Fame</span></a>
       <a mat-list-item  [routerLink]="['./new-person']" routerLinkActive="router-link-active">
-        <mat-icon>add</mat-icon>
+        <mat-icon>person_add</mat-icon>
       <span>add people</span></a>
       <a mat-list-item  [routerLink]="['./ships']" routerLinkActive="router-link-active">
-        <mat-icon>add</mat-icon>
+        <mat-icon>explore</mat-icon>
       <span>Arsenal</span></a>
       <a mat-list-item  [routerLink]="['./new-ship']" routerLinkActive="router-link-active">
         <mat-icon>add</mat-icon>
