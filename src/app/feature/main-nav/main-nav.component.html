@@ -1,0 +1,66 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
+    <mat-toolbar>
+      <a
+        mat-list-item
+        [routerLink]="['home']"
+        style="text-decoration:none"
+        color="primary"
+        >
+        SOL
+      </a>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['./new-term']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>add term</span></a>
+      <a mat-list-item  [routerLink]="['./library']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>Library</span></a>
+      <a mat-list-item  [routerLink]="['./new-book']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>add book</span></a>
+      <a mat-list-item  [routerLink]="['./people']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>Hall of Fame</span></a>
+      <a mat-list-item  [routerLink]="['./new-person']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>add people</span></a>
+      <a mat-list-item  [routerLink]="['./ships']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>Arsenal</span></a>
+      <a mat-list-item  [routerLink]="['./new-ship']" routerLinkActive="router-link-active">
+        <mat-icon>add</mat-icon>
+      <span>add ship</span></a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="(isHandset$ | async)"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>solxviii</span> <span class="spacer"></span>
+      <div *ngIf="(auth.afAuth.authState | async) as user; else showLogin">
+        <span>Hi {{ user.displayName }}!</span>
+        <button mat-button (click)="auth.logout()">Logout</button>
+      </div>
+      <ng-template #showLogin>
+          <button mat-button (click)="auth.login()">Login</button>
+      </ng-template>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,49 @@
+<section>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Ajouter un terme </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="Terme" [(ngModel)]="term" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Definition"
+          [(ngModel)]="content"
+          rows="10"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <div           mat-raised-button
+       >
+        <input
+          mat-raised-button
+          type="file"
+          name="file"
+          id="file"
+          (change)="uploadView($event)"
+        />
+        <div [hidden]="!uploadPercent">
+          <mat-progress-bar
+            mode="determinate"
+            value="{{ uploadPercent | async }}"
+          ></mat-progress-bar>
+        </div>
+        <div [hidden]="!view"><img [src]="view || '//:0'" /></div>
+      </div>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="createTerm()"
+        [disabled]="!term || !content || !view"
+      >
+        Add Term
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

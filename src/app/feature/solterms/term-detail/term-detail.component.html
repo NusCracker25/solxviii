@@ -1,0 +1,64 @@
+<ng-container  *ngIf="term">
+  <div class="vintage_paper" [hidden]="!editing">
+    <h1>Edition of term: {{ term.term }}</h1>
+    <mat-form-field>
+      <input matInput placeholder="Terme" [(ngModel)]="term.term" />
+    </mat-form-field>
+    <br />
+
+    <mat-form-field>
+      <textarea
+        matInput
+        placeholder="Definition"
+        [(ngModel)]="term.def[0].content"
+        rows="10"
+      ></textarea>
+    </mat-form-field>
+    <br />
+
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="updateTerm()"
+    >
+      Save Term
+    </button>
+    <button
+    mat-raised-button
+    (click)="editing=false"
+  >
+    Cancel
+  </button>
+  </div>
+
+  <div class="vintage_paper" [hidden]="editing">
+    <h1>term: {{ term.term }}</h1>
+    <div *ngIf="term">
+      <button
+        *ngIf="auth.currentUserId === term.authors[0]"
+        mat-menu-item
+        (click)="editing = true"
+      >
+        Edit
+      </button>
+      <button
+        *ngIf="auth.currentUserId === term.authors[0]"
+        mat-menu-item
+        (click)="delete()"
+      >
+        Remove
+      </button>
+      <h3>{{ term.term }}</h3>
+      <br />
+      <p>{{ term.def[0].content }}</p>
+      <br />
+      <img src="{{ term.view }}" alt="{{ term.term }}" />
+
+      <p>
+        <small>
+          Created by {{ term.authors }} &bull; on {{ term.creation | date: "fullDate" }}</small
+        >
+      </p>
+    </div>
+  </div>
+</ng-container>
