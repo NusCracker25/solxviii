@@ -13,6 +13,9 @@ import { ShipsComponent } from './solterms/ships/ships.component';
 import { ShipDetailComponent } from './solterms/ship-detail/ship-detail.component';
 import { ShipEditComponent } from './solterms/ship-edit/ship-edit.component';
 
+import {SolGuard} from './solterms/sol-guard';
+import { BookEditComponent } from './solterms/book-edit/book-edit.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -33,7 +36,8 @@ const routes: Routes = [
       },
       {
         path: 'new-term',
-        component: TermEditComponent
+        component: TermEditComponent,
+        canActivate: [SolGuard]
       },
       {
         path: 'library',
@@ -42,6 +46,11 @@ const routes: Routes = [
       {
         path: 'book/:id',
         component: BookDetailComponent
+      },
+      {
+        path: 'new-book',
+        component: BookEditComponent,
+        canActivate: [SolGuard]
       },
       {
         path: 'people',
@@ -53,7 +62,8 @@ const routes: Routes = [
       },
       {
         path: 'new-person',
-        component: PersonEditComponent
+        component: PersonEditComponent,
+        canActivate: [SolGuard]
       },
       {
         path: 'ships',
@@ -65,7 +75,8 @@ const routes: Routes = [
       },
       {
         path: 'new-ship',
-        component: ShipEditComponent
+        component: ShipEditComponent,
+        canActivate: [SolGuard]
       }
     ]
   }

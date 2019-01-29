@@ -14,9 +14,10 @@ import { PersonDetailComponent } from './person-detail/person-detail.component';
 import { ShipDetailComponent } from './ship-detail/ship-detail.component';
 import { ShipEditComponent } from './ship-edit/ship-edit.component';
 import { ShipsComponent } from './ships/ships.component';
+import { BookEditComponent } from './book-edit/book-edit.component';
 
 @NgModule({
-  declarations: [ConstructionComponent, TermDetailComponent, TermEditComponent, BookLibraryComponent, BookDetailComponent, PersonComponent, PersonEditComponent, PersonDetailComponent, ShipDetailComponent, ShipEditComponent, ShipsComponent],
+  declarations: [ConstructionComponent, TermDetailComponent, TermEditComponent, BookLibraryComponent, BookDetailComponent, PersonComponent, PersonEditComponent, PersonDetailComponent, ShipDetailComponent, ShipEditComponent, ShipsComponent, BookEditComponent],
   imports: [
     SharedModule,
     // MatGridListModule,
