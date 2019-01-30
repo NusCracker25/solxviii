@@ -1,3 +1,21 @@
 <p>
   book-edit works!
 </p>
+
+<form class="book-form">
+
+    <mat-form-field class="example-full-width">
+        <input matInput #message placeholder="Title">
+        <mat-hint align="start"><strong>Enter complete title</strong> </mat-hint>
+        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+      </mat-form-field>
+<br>
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+  <br>
+  <button mat-raised-button> Add book</button><span></span><button mat-raised-button>Cancel</button>
+
+</form>
