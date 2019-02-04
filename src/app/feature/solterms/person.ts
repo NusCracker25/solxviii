@@ -1,10 +1,11 @@
 export class Person {
 personID?: string;
-  birth: Date;
+birth: Date;
 death?: Date;
 surname: string;
 name: string;
 
+details?: string;
 nationality?: string;
 picture?: string;
 ext?: string;

@@ -87,35 +87,87 @@
   <mat-card>
     <mat-card-content>
       <form [formGroup]="personFormGroup" (ngSubmit)="createPerson()">
-          <mat-form-field class="person-full-width">
-              <input matInput placeholder="Nom de famille" formControlName="name" />
-              <mat-hint align="start"><strong>Nom de Famille</strong></mat-hint>
-            </mat-form-field>
-            <br>
-            <mat-form-field class="person-full-width">
-                <input matInput placeholder="Prénom" formControlName="surname" />
-                <mat-hint align="start"><strong>Prénom</strong></mat-hint>
-              </mat-form-field>
-
-         Language:
-         <mat-form-field>
-            <mat-select placeholder="Language" formControlName="language">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let lang of languages" [value]="lang">{{
-                lang
-              }}</mat-option>
-            </mat-select>
+        <mat-form-field class="person-full-width">
+          <input matInput placeholder="Nom de famille" formControlName="name" />
+          <mat-hint align="start"><strong>Nom de Famille</strong></mat-hint>
+        </mat-form-field>
+        <mat-form-field class="person-full-width">
+            <input matInput placeholder="Prénom" formControlName="surname" />
+            <mat-hint align="start"><strong>Prénom</strong></mat-hint>
           </mat-form-field>
-
-        <!-- <select formControlName="language">
-          <option *ngFor="let lang of languages" [value]="lang">{{
-            lang
-          }}</option>
-        </select> -->
+        <br />
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="birth"
+            [matDatepicker]="birth"
+            placeholder="Naissance"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="birth"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #birth
+            startView="year"
+            [startAt]="1850"
+          ></mat-datepicker>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="death"
+            [matDatepicker]="death"
+            placeholder="Mort"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="death"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #death
+            startView="year"
+            [startAt]="1850"
+          ></mat-datepicker>
+        </mat-form-field>
         <br />
 
-        <button type="submit" [disabled]="!personFormGroup.valid">Save</button>
-        <button type="reset" (click)="revert()">Revert</button>
+        <br />
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Biographie"
+            formControlName="details"
+            rows="10"
+          ></textarea>
+        </mat-form-field>
+        <br />
+
+        Language:
+        <mat-form-field>
+          <mat-select placeholder="Language" formControlName="language">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let lang of languages" [value]="lang">{{
+              lang
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br />
+        <div align="right">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            (click)="createPerson()"
+            [disabled]="!personFormGroup.valid"
+          >
+            Add Person
+          </button>
+          <button mat-raised-button type="reset" (click)="revert()" mat-button>Cancel</button>
+        </div>
+        <button>Save</button> <button>Revert</button>
       </form>
     </mat-card-content>
   </mat-card>

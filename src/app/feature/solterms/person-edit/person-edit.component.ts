@@ -5,7 +5,7 @@ import { PersonsService } from '../persons.service';
 import { MatSnackBar } from '@angular/material';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'sol-person-edit',
@@ -14,92 +14,93 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class PersonEditComponent implements OnInit {
   languages: string[] = [
-    'Français', 'Espanol' , 'English' , 'Flemish' , 'Deutsh' , 'Russki'
+    'Français',
+    'Espanol',
+    'English',
+    'Flemish',
+    'Deutsh',
+    'Russki'
   ];
 
   personFormGroup: FormGroup;
   valid = false;
+  picture: string;
 
-   surname: string;
-   name: string;
-   birth_st = new Date();
-   death_st = new Date();
-
-    content: string;
-    picture: string = null;
-    uploadPercent: Observable<number>;
-    downloadURL: Observable<string>;
-  constructor(  private authService: AuthService,
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
+  constructor(
+    private authService: AuthService,
     private personService: PersonsService,
     private snackBar: MatSnackBar,
-    private afStorage: AngularFireStorage)  {
-      this.personFormGroup = this.createPersonForm();
-     }
-
-  ngOnInit() {
+    private afStorage: AngularFireStorage,
+    private formBuilder: FormBuilder
+  ) {
+    this.personFormGroup = this.createPersonForm();
   }
 
-createPersonForm(): FormGroup {
-  return new FormGroup({
-    name: new FormControl(''),
-    surname: new FormControl(''),
-    language: new FormControl(''),
-    birth: new FormControl(''),
-    death: new FormControl(''),
-    picture: new FormControl(''),
-    external: new FormControl('')
-  });
-}
+  ngOnInit() {}
 
-revert() {
-  this.personFormGroup.reset();
-}
+  createPersonForm(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(''),
+      surname: new FormControl(''),
+      language: new FormControl(''),
+      details: new FormControl(''),
+      birth: new FormControl(''),
+      death: new FormControl(''),
+      picture: new FormControl(''),
+      external: new FormControl('')
+    });
+  }
 
-/**
- * when submit of form is requested then the person is created
- */
+  revert() {
+    this.personFormGroup.reset();
+  }
+
+  /**
+   * when submit of form is requested then the person is created
+   */
   createPerson() {
     const data = {
-      surname: this.surname,
-      name: this.name,
-      birth: new Date (this.birth_st),
-      picture: this.picture,
+      surname: this.personFormGroup.get('surname'),
+      name: this.personFormGroup.get('name'),
+      birth: this.personFormGroup.get('birth'),
+      death: this.personFormGroup.get('death'),
+      picture: this.personFormGroup.get('picture'),
       creation: new Date(),
-      author: this.authService.currentUserId,
-
+      author: this.authService.currentUserId
     };
-    console.log('creation de personne: ' + JSON.stringify(data));
-    this.snackBar.open( 'Add person: ' + this.name + ', ' + this.surname , '', { duration: 2000, } );
-    this.personService.createPerson(data);
-    this.surname = '';
-    this.name = '';
+    console.log('creation de personne: ' + JSON.stringify(this.personFormGroup.value));
+    // this.snackBar.open('Add person: ' + this.name + ', ' + this.surname, '', {
+    //   duration: 2000
+    // });
+    this.personService.createPerson(this.personFormGroup.value);
+    // this.surname = '';
+    // this.name = '';
   }
 
   uploadView(event) {
     const file = event.target.files[0];
     const path = 'persons/' + file.name;
-    if ( file.type.split('/')[0] !== 'image') {
+    if (file.type.split('/')[0] !== 'image') {
       return alert('only image files'); // utiliser snackbar
     } else {
-
       const fileRef = this.afStorage.ref(path);
       const task = this.afStorage.upload(path, file);
 
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
-    // get notified when the download URL is available
-    task.snapshotChanges().pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(
-            url => this.picture = url
-          );
-        }
+      // observe percentage changes
+      this.uploadPercent = task.percentageChanges();
+      // get notified when the download URL is available
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = fileRef.getDownloadURL();
+            this.downloadURL.subscribe(url => (this.picture = url));
+          })
         )
-     )
-    .subscribe();
-    // this.downloadURL.subscribe(url => this.view = url);
+        .subscribe();
+      // this.downloadURL.subscribe(url => this.view = url);
     }
   }
 }
-
