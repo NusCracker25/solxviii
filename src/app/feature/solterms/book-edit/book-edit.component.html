@@ -1,21 +1,71 @@
-<p>
-  book-edit works!
-</p>
-
-<form class="book-form">
-
-    <mat-form-field class="example-full-width">
-        <input matInput #message placeholder="Title">
-        <mat-hint align="start"><strong>Enter complete title</strong> </mat-hint>
-        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-      </mat-form-field>
-<br>
-      <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+<section>
+  <!-- <mat-accordion> -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> Ajouter un livre </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="book-form">
+        <mat-form-field class="book-full-width">
+          <input matInput #message placeholder="Title" />
+          <mat-hint align="start"
+            ><strong>Enter complete title</strong>
+          </mat-hint>
         </mat-form-field>
-  <br>
-  <button mat-raised-button> Add book</button><span></span><button mat-raised-button>Cancel</button>
+        <mat-form-field class="book-full-width">
+          <input
+            matInput
+            #message
+            placeholder="Author"
+            [matAutocomplete]="authorList"
+          />
+          <mat-hint align="start"><strong>Enter author name</strong> </mat-hint>
+        </mat-form-field>
+        <mat-autocomplete #authorList>
+          <mat-option *ngFor="let author of authors" [value]="author">{{
+            author
+          }}</mat-option>
+        </mat-autocomplete>
+        <br />
+        <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Publication Date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker
+            startView="year"
+            [startAt]="1850"
+          ></mat-datepicker>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="book-full-width">
+          <input type="url" matInput #message placeholder="URL" />
+          <mat-hint align="start"
+            ><strong>
+              Add URL where book can be bought or downloaded from</strong
+            >
+          </mat-hint>
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <mat-select placeholder="Language">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let lang of languages" [value]="lang">{{
+              lang
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-</form>
+        <button mat-raised-button>Add book</button><span></span
+        ><button mat-raised-button>Cancel</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <!-- </mat-accordion> -->
+</section>

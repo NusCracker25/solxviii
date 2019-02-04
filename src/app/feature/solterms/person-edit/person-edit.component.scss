@@ -1,0 +1,19 @@
+.person-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.person-full-width {
+  width: 100%;
+}
+
+section{
+  max-width: 700px;
+  margin:  2em auto;
+}
+mat-form-field{
+  width: 100%;
+}

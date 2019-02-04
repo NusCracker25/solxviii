@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Person } from '../person';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { PersonsService } from '../persons.service';
+import { Router } from '@angular/router';
+import { AuthService } from '@core/auth.service';
 
 @Component({
   selector: 'sol-person',
@@ -7,9 +13,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonComponent implements OnInit {
 
-  constructor() { }
+  persons: Observable<Person[]>;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public personService: PersonsService,
+    public router: Router,
+    public auth: AuthService) {
+
+    }
 
   ngOnInit() {
+    this.persons = this.personService.getPersons();
+    console.log(this);
   }
 
+  expand(id: string) {
+   this.router.navigate(['/home/person', id]);
+  }
 }

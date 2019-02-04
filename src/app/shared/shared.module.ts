@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { SharedRoutingModule } from './shared-routing.module';
 import { MaterialModule } from './material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,
+ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,13 +13,15 @@ import { FormsModule } from '@angular/forms';
     SharedRoutingModule,
     MaterialModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MaterialModule,
     RouterModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: []
 })
