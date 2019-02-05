@@ -5,7 +5,7 @@ import { PersonsService } from '../persons.service';
 import { MatSnackBar } from '@angular/material';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'sol-person-edit',
@@ -42,11 +42,11 @@ export class PersonEditComponent implements OnInit {
 
   createPersonForm(): FormGroup {
     return new FormGroup({
-      name: new FormControl(''),
-      surname: new FormControl(''),
+      name: new FormControl('', Validators.required),
+      surname: new FormControl('', Validators.required),
       language: new FormControl(''),
       details: new FormControl(''),
-      birth: new FormControl(''),
+      birth: new FormControl('', Validators.required),
       death: new FormControl(''),
       picture: new FormControl(''),
       external: new FormControl('')
