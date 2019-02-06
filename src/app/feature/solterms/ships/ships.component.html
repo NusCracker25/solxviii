@@ -1,5 +1,36 @@
 <div class="grid-container">
-<p>
-  ships works!
-</p>
+  <div class="grid-container">
+    <h1 class="mat-h1">Personnages célèbres</h1>
+    <mat-grid-list cols="2" rowHeight="350px">
+      <mat-grid-tile *ngFor="let ship of ships | async" [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{ship.name}}, {{ship.construction}}
+              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item (click)='expand(ship.shipID)'>Expand</button>
+                <button *ngIf="auth.currentUserId === ship.author" mat-menu-item (click)='expand(ship.shipID)'>Edit</button>
+                <button *ngIf="auth.currentUserId === ship.author" mat-menu-item (click)='shipService.deleteShip(ship.shipID)'>Remove</button>
+
+              </mat-menu>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div overflow="auto" >
+              UID for Ship: {{ship.shipID}}
+              <br>
+              <!-- {{term.def[0].content}} -->
+
+            <img src="{{ship.picture}}" alt ="{{ship.name}}">
+            </div>
+            <p><small> Created by {{ship.author}} &bull; on {{ship.creation}}</small></p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
 </div>

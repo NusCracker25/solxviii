@@ -3,24 +3,20 @@
       <mat-card-content>
         <form [formGroup]="shipForm" (ngSubmit)="createShip()">
           <mat-form-field class="person-full-width">
-            <input matInput placeholder="Nom de famille" formControlName="name" />
-            <mat-hint align="start"><strong>Nom de Famille</strong></mat-hint>
+            <input matInput placeholder="Nom du vaisseau" formControlName="name" />
+            <mat-hint align="start"><strong>Nom du bateau</strong></mat-hint>
           </mat-form-field>
-          <mat-form-field class="person-full-width">
-              <input matInput placeholder="Prénom" formControlName="surname" />
-              <mat-hint align="start"><strong>Prénom</strong></mat-hint>
-            </mat-form-field>
-          <br />
+          <br>
           <mat-form-field>
             <input
               matInput
-              formControlName="birth"
-              [matDatepicker]="birth"
-              placeholder="Naissance"
+              formControlName="construction"
+              [matDatepicker]="construction"
+              placeholder="Construction"
             />
             <mat-datepicker-toggle
               matSuffix
-              [for]="birth"
+              [for]="construction"
             ></mat-datepicker-toggle>
             <mat-datepicker
               #birth
@@ -28,20 +24,31 @@
               [startAt]="1850"
             ></mat-datepicker>
           </mat-form-field>
-          <br />
+          <br>
+          <mat-form-field class="person-full-width">
+            <input matInput placeholder="Ingénieur" formControlName="engineerID" />
+            <mat-hint align="start"><strong>Constructeur</strong></mat-hint>
+          </mat-form-field>
+        <br />
+
+        <mat-form-field class="person-full-width">
+          <input matInput placeholder="Chantier Naval" formControlName="asernalID" />
+          <mat-hint align="start"><strong>Chantier Naval</strong></mat-hint>
+        </mat-form-field>
+      <br />
           <mat-form-field>
             <input
               matInput
-              formControlName="death"
-              [matDatepicker]="death"
-              placeholder="Mort"
+              formControlName="destruction"
+              [matDatepicker]="destruction"
+              placeholder="Destruction"
             />
             <mat-datepicker-toggle
               matSuffix
-              [for]="death"
+              [for]="destruction"
             ></mat-datepicker-toggle>
             <mat-datepicker
-              #death
+              #destruction
               startView="year"
               [startAt]="1850"
             ></mat-datepicker>
@@ -52,7 +59,7 @@
           <mat-form-field>
             <textarea
               matInput
-              placeholder="Biographie"
+              placeholder="Histoire"
               formControlName="details"
               rows="10"
             ></textarea>
@@ -63,8 +70,7 @@
               type="submit"
               mat-raised-button
               color="primary"
-              (click)="createShip()"
-              [disabled]="!personFormGroup.valid"
+              [disabled]="!shipForm.valid"
             >
               Add Person
             </button>

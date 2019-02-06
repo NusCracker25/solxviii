@@ -34,11 +34,11 @@ export class ShipEditComponent implements OnInit {
   createShipForm(): FormGroup {
     return new FormGroup({
       name: new FormControl('', Validators.required),
-      surname: new FormControl('', Validators.required),
-      language: new FormControl(''),
       details: new FormControl(''),
-      birth: new FormControl('', Validators.required),
-      death: new FormControl(''),
+      construction: new FormControl('', Validators.required),
+      engineer: new FormControl(''),
+      arsenal: new FormControl(''),
+      destruction: new FormControl(''),
       picture: new FormControl(''),
       external: new FormControl('')
     });
@@ -52,20 +52,12 @@ export class ShipEditComponent implements OnInit {
    * when submit of form is requested then the ship is created
    */
   createShip() {
-    const data = {
-      surname: this.shipForm.get('surname'),
-      name: this.shipForm.get('name'),
-      birth: this.shipForm.get('birth'),
-      death: this.shipForm.get('death'),
-      picture: this.shipForm.get('picture'),
-      creation: new Date(),
-      author: this.authService.currentUserId
-    };
-    console.log('creation de shipne: ' + JSON.stringify(this.shipForm.value));
-    // this.snackBar.open('Add ship: ' + this.name + ', ' + this.surname, '', {
-    //   duration: 2000
-    // });
+
     this.shipService.createShip(this.shipForm.value);
+    console.log('creation de ship: ' + JSON.stringify(this.shipForm.value));
+    this.snackBar.open('Add ship: ' +  this.shipForm.value.name , '', {
+      duration: 2000
+  });
     // this.surname = '';
     // this.name = '';
   }
