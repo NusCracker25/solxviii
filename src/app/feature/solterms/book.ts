@@ -1,14 +1,15 @@
 export class Book {
+
   title: string;
-  authorID: string[];
+  author: string[];
 
   published: Date;
   url_ref: string;
   language: string;
 
   view?: string;
-  id?: string;
-
+  book_id?: string;
+  summary?: string;
   creation: Date;
   modified?: Date[];
 }

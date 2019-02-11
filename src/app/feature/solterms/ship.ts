@@ -1,9 +1,11 @@
 export class Ship {
-  ID?: string;
+  shipID?: string;
 construction: Date;
 arsenalID: string;
 destruction?: Date;
 name: string;
+
+engineerID: string;
 
 details?: string;
 

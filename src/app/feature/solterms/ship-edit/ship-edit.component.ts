@@ -52,10 +52,14 @@ export class ShipEditComponent implements OnInit {
    * when submit of form is requested then the ship is created
    */
   createShip() {
+    const data = this.shipForm.value;
+    data.creation = new Date(),
+    data.author = [this.authService.currentUserId],
 
-    this.shipService.createShip(this.shipForm.value);
-    console.log('creation de ship: ' + JSON.stringify(this.shipForm.value));
-    this.snackBar.open('Add ship: ' +  this.shipForm.value.name , '', {
+
+    this.shipService.createShip(data);
+    console.log('creation de ship: ' + JSON.stringify(data));
+    this.snackBar.open('Add ship: ' +  data.name , '', {
       duration: 2000
   });
     // this.surname = '';

@@ -1,71 +1,74 @@
 <section>
-  <!-- <mat-accordion> -->
   <mat-card>
-    <mat-card-header>
-      <mat-card-title> Ajouter un livre </mat-card-title>
-    </mat-card-header>
     <mat-card-content>
-      <form class="book-form">
+      <form [formGroup]="bookForm" (ngSubmit)="createBook()">
         <mat-form-field class="book-full-width">
-          <input matInput #message placeholder="Title" />
-          <mat-hint align="start"
-            ><strong>Enter complete title</strong>
-          </mat-hint>
+          <input matInput placeholder="Titre" formControlName="title" />
+          <mat-hint align="start"><strong>Titre</strong></mat-hint>
         </mat-form-field>
         <mat-form-field class="book-full-width">
-          <input
-            matInput
-            #message
-            placeholder="Author"
-            [matAutocomplete]="authorList"
-          />
-          <mat-hint align="start"><strong>Enter author name</strong> </mat-hint>
-        </mat-form-field>
-        <mat-autocomplete #authorList>
-          <mat-option *ngFor="let author of authors" [value]="author">{{
-            author
-          }}</mat-option>
-        </mat-autocomplete>
+            <input matInput placeholder="Auteur" formControlName="author" />
+            <mat-hint align="start"><strong>Auteur</strong></mat-hint>
+          </mat-form-field>
         <br />
         <mat-form-field>
           <input
             matInput
-            [matDatepicker]="picker"
-            placeholder="Publication Date"
+            formControlName="published"
+            [matDatepicker]="published"
+            placeholder="Edition"
           />
           <mat-datepicker-toggle
             matSuffix
-            [for]="picker"
+            [for]="published"
           ></mat-datepicker-toggle>
           <mat-datepicker
-            #picker
+            #published
             startView="year"
             [startAt]="1850"
           ></mat-datepicker>
         </mat-form-field>
         <br />
-        <mat-form-field class="book-full-width">
-          <input type="url" matInput #message placeholder="URL" />
-          <mat-hint align="start"
-            ><strong>
-              Add URL where book can be bought or downloaded from</strong
-            >
-          </mat-hint>
+
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Résumé"
+            formControlName="summary"
+            rows="10"
+          ></textarea>
         </mat-form-field>
         <br />
+
+        Language:
         <mat-form-field>
-          <mat-select placeholder="Language">
+          <mat-select placeholder="Language" formControlName="language">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let lang of languages" [value]="lang">{{
               lang
             }}</mat-option>
           </mat-select>
         </mat-form-field>
+        <br>
+        <mat-form-field class="book-full-width">
+          <input matInput placeholder="URL" formControlName="external" />
+          <mat-hint align="start"><strong>Où le récupérer</strong></mat-hint>
+        </mat-form-field>
 
-        <button mat-raised-button>Add book</button><span></span
-        ><button mat-raised-button>Cancel</button>
+
+        <br />
+        <div align="right">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="!bookForm.valid"
+          >
+            Add Book
+          </button>
+          <button mat-raised-button type="reset" (click)="revert()" mat-button>Cancel</button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>
-  <!-- </mat-accordion> -->
 </section>

@@ -19,7 +19,7 @@
               [for]="construction"
             ></mat-datepicker-toggle>
             <mat-datepicker
-              #birth
+              #construction
               startView="year"
               [startAt]="1850"
             ></mat-datepicker>
@@ -72,11 +72,11 @@
               color="primary"
               [disabled]="!shipForm.valid"
             >
-              Add Person
+              Add Ship
             </button>
             <button mat-raised-button type="reset" (click)="revert()" mat-button>Cancel</button>
           </div>
-          <button>Save</button> <button>Revert</button>
+
         </form>
       </mat-card-content>
     </mat-card>

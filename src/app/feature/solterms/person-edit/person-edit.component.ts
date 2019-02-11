@@ -13,6 +13,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./person-edit.component.scss']
 })
 export class PersonEditComponent implements OnInit {
+
   languages: string[] = [
     'Français',
     'Espanol',
