@@ -1,6 +1,4 @@
-<p>
-  person works!
-</p>
+
 <div class="grid-container">
     <h1 class="mat-h1">Personnages célèbres</h1>
     <mat-grid-list cols="2" rowHeight="350px">
@@ -13,22 +11,22 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item (click)='expand(person.personID)'>Expand</button>
-                <button *ngIf="auth.currentUserId === person.author" mat-menu-item (click)='expand(person.personID)'>Edit</button>
-                <button *ngIf="auth.currentUserId === person.author" mat-menu-item (click)='personService.deletePerson(person.personID)'>Remove</button>
+                <button mat-menu-item (click)='expand(person.id)'>Expand</button>
+                <button *ngIf="auth.currentUserId === person.author" mat-menu-item (click)='expand(person.id)'>Edit</button>
+                <button *ngIf="auth.currentUserId === person.author" mat-menu-item (click)='personService.deletePerson(person.id)'>Remove</button>
 
               </mat-menu>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="dashboard-card-content">
             <div overflow="auto" >
-              UID for Term: {{person.personID}}
+              UID for person: {{person.id}}
               <br>
               <!-- {{term.def[0].content}} -->
 
             <img src="{{person.picture}}" alt ="{{person.name}}">
             </div>
-            <p><small> Created by {{person.author}} &bull; on {{person.creation}}</small></p>
+            <p><small> Created by {{person.author}} &bull; on {{person.creation.getSeconds | date:'short'}}</small></p>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>

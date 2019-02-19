@@ -5,6 +5,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { PersonsService } from '../persons.service';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth.service';
+import { ConstructionComponent } from '../construction/construction.component';
 
 @Component({
   selector: 'sol-person',
@@ -29,6 +30,8 @@ export class PersonComponent implements OnInit {
   }
 
   expand(id: string) {
+  console.log("vers person "+id);
+
    this.router.navigate(['/home/person', id]);
   }
 }

@@ -62,22 +62,17 @@ export class PersonEditComponent implements OnInit {
    * when submit of form is requested then the person is created
    */
   createPerson() {
-    const data = {
-      surname: this.personFormGroup.get('surname'),
-      name: this.personFormGroup.get('name'),
-      birth: this.personFormGroup.get('birth'),
-      death: this.personFormGroup.get('death'),
-      picture: this.personFormGroup.get('picture'),
-      creation: new Date(),
-      author: this.authService.currentUserId
-    };
-    console.log('creation de personne: ' + JSON.stringify(this.personFormGroup.value));
-    // this.snackBar.open('Add person: ' + this.name + ', ' + this.surname, '', {
-    //   duration: 2000
-    // });
-    this.personService.createPerson(this.personFormGroup.value);
-    // this.surname = '';
-    // this.name = '';
+
+    const data = this.personFormGroup.value;
+    data.creation = new Date();
+    data.author = this.authService.currentUserId;
+
+    console.log('creation de personne: ' + JSON.stringify(data));
+    this.snackBar.open('Add person: ' + data.name + ', ' + data.surname, '', {
+      duration: 2000
+    });
+    this.personService.createPerson(data);
+    this.personFormGroup.reset();
   }
 
   uploadView(event) {

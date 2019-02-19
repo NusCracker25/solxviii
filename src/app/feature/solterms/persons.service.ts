@@ -36,6 +36,7 @@ export class PersonsService {
   }
 
   createPerson(data: Person) {
+    console.log('createion d\'une personne ' + JSON.stringify(data));
     this.personsCollection.add(data);
   }
 
