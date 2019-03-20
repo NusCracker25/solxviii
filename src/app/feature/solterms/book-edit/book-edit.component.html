@@ -6,10 +6,15 @@
           <input matInput placeholder="Titre" formControlName="title" />
           <mat-hint align="start"><strong>Titre</strong></mat-hint>
         </mat-form-field>
-        <mat-form-field class="book-full-width">
-            <input matInput placeholder="Auteur" formControlName="author" />
-            <mat-hint align="start"><strong>Auteur</strong></mat-hint>
-          </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Auteur" formControlName="author">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let author of authors | async" [value]="author">{{
+              author.name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
         <br />
         <mat-form-field>
           <input

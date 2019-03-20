@@ -58,8 +58,25 @@
           ></textarea>
         </mat-form-field>
         <br />
+        <div           mat-raised-button
+         >
+          <input
+            mat-raised-button
+            type="file"
+            name="file"
+            id="file"
+            (change)="uploadView($event)"
+          />
+          <div [hidden]="!uploadPercent">
+            <mat-progress-bar
+              mode="determinate"
+              value="{{ uploadPercent | async }}"
+            ></mat-progress-bar>
+          </div>
+          <div [hidden]="!view"><img [src]="picture || '//:0'" /></div>
+        </div>
+        <br />
 
-        Language:
         <mat-form-field>
           <mat-select placeholder="Language" formControlName="language">
             <mat-option>None</mat-option>

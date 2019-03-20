@@ -30,7 +30,7 @@ export class PersonComponent implements OnInit {
   }
 
   expand(id: string) {
-  console.log("vers person "+id);
+  console.log('vers person '+id);
 
    this.router.navigate(['/home/person', id]);
   }

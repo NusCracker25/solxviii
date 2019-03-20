@@ -19,7 +19,7 @@ export class PersonEditComponent implements OnInit {
     'Espanol',
     'English',
     'Flemish',
-    'Deutsh',
+    'Deutsch',
     'Russki'
   ];
 
@@ -66,7 +66,9 @@ export class PersonEditComponent implements OnInit {
     const data = this.personFormGroup.value;
     data.creation = new Date();
     data.author = this.authService.currentUserId;
-
+    if (this.picture !== undefined){
+      data.view = this.picture;
+    }
     console.log('creation de personne: ' + JSON.stringify(data));
     this.snackBar.open('Add person: ' + data.name + ', ' + data.surname, '', {
       duration: 2000
@@ -77,26 +79,28 @@ export class PersonEditComponent implements OnInit {
 
   uploadView(event) {
     const file = event.target.files[0];
-    const path = 'persons/' + file.name;
-    if (file.type.split('/')[0] !== 'image') {
+    const path = 'solterms/' + file.name;
+    if ( file.type.split('/')[0] !== 'image') {
       return alert('only image files'); // utiliser snackbar
     } else {
+
       const fileRef = this.afStorage.ref(path);
       const task = this.afStorage.upload(path, file);
 
-      // observe percentage changes
-      this.uploadPercent = task.percentageChanges();
-      // get notified when the download URL is available
-      task
-        .snapshotChanges()
-        .pipe(
-          finalize(() => {
-            this.downloadURL = fileRef.getDownloadURL();
-            this.downloadURL.subscribe(url => (this.picture = url));
-          })
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(
+            url => this.picture = url
+          );
+        }
         )
-        .subscribe();
-      // this.downloadURL.subscribe(url => this.view = url);
+     )
+    .subscribe();
+     this.downloadURL.subscribe(url => this.picture = url);
     }
   }
 }

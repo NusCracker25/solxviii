@@ -7,6 +7,8 @@ import { BooksService } from '../books.service';
 import { MatSnackBar } from '@angular/material';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { Person } from '../person';
+import { PersonsService } from '../persons.service';
 
 @Component({
   selector: 'sol-book-edit',
@@ -24,6 +26,8 @@ export class BookEditComponent implements OnInit {
     'Russki'
   ];
 
+  authors: Observable<Person[]>;
+
   bookForm: FormGroup;
   valid = false;
   picture: string;
@@ -35,12 +39,15 @@ export class BookEditComponent implements OnInit {
     private bookService: BooksService,
     private snackBar: MatSnackBar,
     private afStorage: AngularFireStorage,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private personService: PersonsService
   ) {
     this.bookForm = this.createBookForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authors = this.personService.getPersons();
+  }
 
   createBookForm(): FormGroup {
     return new FormGroup({
@@ -63,12 +70,21 @@ export class BookEditComponent implements OnInit {
   createBook() {
 
     console.log('creation de bookne: ' + JSON.stringify(this.bookForm.value));
-    // this.snackBar.open('Add book: ' + this.name + ', ' + this.surname, '', {
-    //   duration: 2000
-    // });
-    this.bookService.createBook(this.bookForm.value);
-    // this.surname = '';
-    // this.name = '';
+    const book = {
+      title: this.bookForm.value.title,
+      author: this.bookForm.value.author.id,
+      language: this.bookForm.value.language,
+      published: this.bookForm.value.published,
+      picture: this.bookForm.value.picture,
+      url_ref: this.bookForm.value.external,
+      creation : new Date(),
+      user_creator : this.authService.currentUserId
+    };
+    this.snackBar.open('Add book: ' + this.bookForm.value.title , '', {
+       duration: 2000
+    });
+    this.bookService.createBook(book);
+    this.bookForm.reset();
   }
 
   uploadView(event) {

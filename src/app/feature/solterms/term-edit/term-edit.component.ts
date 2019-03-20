@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'sol-term-edit',
@@ -13,9 +14,10 @@ import { finalize } from 'rxjs/operators';
 })
 export class TermEditComponent implements OnInit {
 
-  term: string;
-  content: string;
-  view: string = null;
+  termForm: FormGroup;
+  valid = false;
+  picture: string;
+
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
 
@@ -25,28 +27,41 @@ export class TermEditComponent implements OnInit {
     private termService: TermsService,
     private snackBar: MatSnackBar,
     private afStorage: AngularFireStorage
-  ) { }
+  ) {
+    this.termForm = this.createTermForm();
+  }
 
   ngOnInit() {
+  }
+  createTermForm(): FormGroup {
+    return new FormGroup({
+      term: new FormControl('', Validators.required),
+      definition: new FormControl('', Validators.required),
+      picture: new FormControl('')
+    });
+  }
+
+  revert() {
+    this.termForm.reset();
   }
 
   createTerm() {
     const data = {
-      term: this.term,
+      term: this.termForm.value.term,
       def: [ {
-        content: this.content,
+        content: this.termForm.value.definition,
         source: null,
         author_id: null
       }],
-      view: this.view,
+      view: this.picture,
       creation: new Date(),
       authors: [this.authService.currentUserId],
       // author: this.authService.authState.displayName || this.authService.authState.email
     };
-    this.snackBar.open( 'Add term: ' + this.term, '', { duration: 2000, } );
+    console.log("creation de "+JSON.stringify(data));
+    this.snackBar.open( 'Add term: ' + data.term, '', { duration: 2000, } );
     this.termService.createTerm(data);
-    this.term = '';
-    this.content = '';
+    this.revert();
   }
 
   uploadView(event) {
@@ -66,13 +81,13 @@ export class TermEditComponent implements OnInit {
         finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(
-            url => this.view = url
+            url => this.picture = url
           );
         }
         )
      )
     .subscribe();
-    // this.downloadURL.subscribe(url => this.view = url);
+     this.downloadURL.subscribe(url => this.picture = url);
     }
   }
 

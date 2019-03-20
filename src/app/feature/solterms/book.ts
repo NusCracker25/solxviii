@@ -11,5 +11,6 @@ export class Book {
   book_id?: string;
   summary?: string;
   creation: Date;
+  user_creator: string;
   modified?: Date[];
 }
