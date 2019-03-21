@@ -5,7 +5,7 @@
       <mat-grid-tile *ngFor="let person of persons | async" [colspan]="1" [rowspan]="1">
         <mat-card class="dashboard-card">
           <mat-card-header>
-            <mat-card-title>
+            <mat-card-title (click)='expand(person.id)'>
               {{person.surname}}, {{person.name}}
               <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                 <mat-icon>more_vert</mat-icon>
@@ -22,9 +22,10 @@
             <div overflow="auto" >
               UID for person: {{person.id}}
               <br>
-              <!-- {{term.def[0].content}} -->
-
-            <img src="{{person.picture}}" alt ="{{person.name}}">
+              <img *ngIf="person.picture; else no_picture" src="{{ person.picture }}" alt="{{ person.name }}"/>
+              <ng-template #no_picture>
+                <img src="/assets/no_picture.png" alt="">
+              </ng-template>
             </div>
             <p><small> Created by {{person.author}} &bull; on {{person.creation.getSeconds | date:'short'}}</small></p>
           </mat-card-content>

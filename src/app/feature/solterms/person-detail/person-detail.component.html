@@ -1,3 +1,69 @@
-<p>
-  person-detail works!
-</p>
+
+<div class="grid-container">
+  <ng-container *ngIf="person">
+    <div class="vintage_paper grid-container" [hidden]="!editing">
+      <h1>Edition of person: {{ person.name }}</h1>
+      <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="person.name" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Definition"
+          [(ngModel)]="person.details"
+          rows="10"
+        ></textarea>
+      </mat-form-field>
+      <br />
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="updateTerm()"
+      >
+        Save Term
+      </button>
+      <button
+      mat-raised-button
+      (click)="editing=false"
+    >
+      Cancel
+    </button>
+    </div>
+
+    <div class="vintage_paper" [hidden]="editing">
+      <h1>person: {{ person.name }}</h1>
+      <div *ngIf="person">
+        <button
+          *ngIf="auth.currentUserId === person.author"
+          mat-menu-item
+          (click)="editing = true"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="auth.currentUserId === person.author"
+          mat-menu-item
+          (click)="delete()"
+        >
+          Remove
+        </button>
+        <h3>{{ person.name }}</h3>
+        <br />
+        <p>{{ person.details }}</p>
+        <br />
+        <img *ngIf="person.picture; else no_picture" src="{{ person.picture }}" alt="{{ person.name }}" />
+        <ng-template #no_picture>
+          <img src="/assets/no_picture.png" alt="">
+        </ng-template>
+        <p>
+          <small>
+            Created by {{ person.author }} &bull; on {{ person.creation | date: "fullDate" }}</small
+          >
+        </p>
+      </div>
+    </div>
+  </ng-container>
+  </div>

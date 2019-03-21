@@ -53,8 +53,10 @@
       <br />
       <p>{{ term.def[0].content }}</p>
       <br />
-      <img src="{{ term.view }}" alt="{{ term.term }}" />
-
+      <img *ngIf="term.view; else no_picture" src="{{ term.view }}" alt="{{ term.term }}" />
+      <ng-template #no_picture>
+        <img src="/assets/no_picture.png" alt="">
+      </ng-template>
       <p>
         <small>
           Created by {{ term.authors }} &bull; on {{ term.creation | date: "fullDate" }}</small
