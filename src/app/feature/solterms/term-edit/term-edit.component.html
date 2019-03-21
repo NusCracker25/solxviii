@@ -36,6 +36,24 @@
           </div>
           <div [hidden]="!view"><img [src]="picture || '//:0'" /></div>
         </div>
+ <!-- to add 3D view -->
+ <div           mat-raised-button
+ >
+  <input
+    mat-raised-button
+    type="file"
+    name="file"
+    id="file"
+    (change)="upload3D($event)"
+  />
+  <div [hidden]="!upload3DPercent">
+    <mat-progress-bar
+      mode="determinate"
+      value="{{ upload3DPercent | async }}"
+    ></mat-progress-bar>
+  </div>
+  <div [hidden]="!view"><img [src]="picture || '//:0'" /></div>
+</div>
         <br />
         <div align="right">
           <button

@@ -20,7 +20,8 @@ export class TermEditComponent implements OnInit {
 
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
-
+  upload3DPercent: Observable<number>;
+  download3DURL: Observable<string>;
 
   constructor(
     private authService: AuthService,
@@ -88,6 +89,33 @@ export class TermEditComponent implements OnInit {
      )
     .subscribe();
      this.downloadURL.subscribe(url => this.picture = url);
+    }
+  }
+
+  upload3D(event) {
+    const file = event.target.files[0];
+    const path = 'solterms/' + file.name;
+    if ( file.type.split('/')[0] !== 'stl') {
+      return alert('this must an STL file'); // utiliser snackbar
+    } else {
+
+      const fileRef = this.afStorage.ref(path);
+      const task = this.afStorage.upload(path, file);
+
+    // observe percentage changes
+    this.upload3DPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+        finalize(() => {
+          this.download3DURL = fileRef.getDownloadURL();
+          this.download3DURL.subscribe(
+            url => this.picture = url
+          );
+        }
+        )
+     )
+    .subscribe();
+     this.download3DURL.subscribe(url => this.picture = url);
     }
   }
 
