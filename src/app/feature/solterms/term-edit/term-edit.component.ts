@@ -17,6 +17,7 @@ export class TermEditComponent implements OnInit {
   termForm: FormGroup;
   valid = false;
   picture: string;
+  geometry: string;
 
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
@@ -56,10 +57,11 @@ export class TermEditComponent implements OnInit {
       }],
       view: this.picture,
       creation: new Date(),
+      geometry: this.geometry,
       authors: [this.authService.currentUserId],
       // author: this.authService.authState.displayName || this.authService.authState.email
     };
-    console.log("creation de "+JSON.stringify(data));
+    console.log('creation de ' + JSON.stringify(data));
     this.snackBar.open( 'Add term: ' + data.term, '', { duration: 2000, } );
     this.termService.createTerm(data);
     this.revert();
@@ -88,14 +90,13 @@ export class TermEditComponent implements OnInit {
         )
      )
     .subscribe();
-     this.downloadURL.subscribe(url => this.picture = url);
     }
   }
 
   upload3D(event) {
     const file = event.target.files[0];
     const path = 'solterms/' + file.name;
-    if ( file.type.split('/')[0] !== 'stl') {
+    if ( file.name.split('.')[1] !== 'stl') {
       return alert('this must an STL file'); // utiliser snackbar
     } else {
 
@@ -109,13 +110,12 @@ export class TermEditComponent implements OnInit {
         finalize(() => {
           this.download3DURL = fileRef.getDownloadURL();
           this.download3DURL.subscribe(
-            url => this.picture = url
+            url => this.geometry = url
           );
         }
         )
      )
     .subscribe();
-     this.download3DURL.subscribe(url => this.picture = url);
     }
   }
 

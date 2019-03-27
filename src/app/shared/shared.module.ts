@@ -12,7 +12,7 @@ import { ThreeDModule } from './threeD/threeD.module';
 @NgModule({
   imports: [
     CommonModule,
-    ThreeDModule,
+   // ThreeDModule,
     SharedRoutingModule,
     MaterialModule,
     RouterModule,
@@ -21,7 +21,7 @@ import { ThreeDModule } from './threeD/threeD.module';
   ],
   exports: [
     MaterialModule,
-    ThreeDModule,
+  //  ThreeDModule,
     RouterModule,
     CommonModule,
     FormsModule,

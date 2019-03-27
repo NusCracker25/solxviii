@@ -22,6 +22,7 @@
       "@shared/*":["src/app/shared/*"],
       "@feature/*":["src/app/feature/*"]
     },
+    "files":["src/typings/aframe/AFRAME.d.ts"],
     "lib": [
       "es2017",
       "dom"

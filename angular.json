@@ -33,7 +33,9 @@
               "src/styles.scss",
               "src/theme.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/aframe/dist/aframe-master.js"
+            ]
           },
           "configurations": {
             "production": {

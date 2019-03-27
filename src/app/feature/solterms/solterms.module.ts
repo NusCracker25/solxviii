@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { ConstructionComponent } from './construction/construction.component';
 import { TermDetailComponent } from './term-detail/term-detail.component';
@@ -31,6 +31,9 @@ import { BooksService } from './books.service';
     PersonComponent,
     PersonDetailComponent,
     PersonEditComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   imports: [SharedModule],
   providers: [TermsService, PersonsService, ShipsService, BooksService]

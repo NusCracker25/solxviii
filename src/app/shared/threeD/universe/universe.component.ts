@@ -104,7 +104,7 @@ export class UniverseComponent implements OnInit , AfterViewInit {
     this.createRenderer();
     this.setSkyBox();
     // add boxes
-    console.log('contenu de la scene: ' + JSON.stringify(this.boxes));
+    // console.log('contenu de la scene: ' + JSON.stringify(this.boxes));
     this.boxes.forEach(box => {
       const mesh = box.createMesh();
       console.log('creation de ' + box.name);
@@ -295,6 +295,7 @@ public setControl(control: string) {
       this.htmlDivCanvas.clientWidth * this.screenSize,
       this.htmlDivCanvas.clientHeight * this.screenSize
     );
+    console.log('dimension canvas: h:  ' + this.htmlDivCanvas.clientHeight + ' px;   w:  ' + this.htmlDivCanvas.clientWidth + 'px');
     this.renderer.setPixelRatio(devicePixelRatio);
     // this.render();
   }

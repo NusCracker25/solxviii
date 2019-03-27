@@ -6,3 +6,16 @@ img {
 // .grid-container {
 //   margin: 20px;
 // }
+
+.container-canvas{
+  position:relative;
+  height:100%;
+  width:100%;
+  padding: 0;
+  margin: 0;
+}
+
+#piece_view {
+  height: 300px;
+  width: auto;
+}
