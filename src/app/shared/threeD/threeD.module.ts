@@ -10,6 +10,7 @@ import { CameraComponent } from './camera/camera.component';
 import { MeshJSONComponent } from './mesh-json/mesh-json.component';
 import { ThreeObjectComponent } from './three-object/three-object.component';
 import { MeshSTLComponent } from './mesh-stl/mesh-stl.component';
+import { HudComponent } from './hud/hud.component';
 
 
 /**
@@ -31,7 +32,8 @@ import { MeshSTLComponent } from './mesh-stl/mesh-stl.component';
     CameraComponent,
     MeshJSONComponent,
     ThreeObjectComponent,
-    MeshSTLComponent
+    MeshSTLComponent,
+    HudComponent
   ],
   exports: [
     BoxThreeComponent,
@@ -43,7 +45,8 @@ import { MeshSTLComponent } from './mesh-stl/mesh-stl.component';
     CameraComponent,
     MeshJSONComponent,
     ThreeObjectComponent,
-    MeshSTLComponent
+    MeshSTLComponent,
+    HudComponent
   ]
 })
 export class ThreeDModule {}

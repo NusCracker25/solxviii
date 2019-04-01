@@ -15,6 +15,7 @@ import { ShipEditComponent } from './solterms/ship-edit/ship-edit.component';
 
 import {SolGuard} from './solterms/sol-guard';
 import { BookEditComponent } from './solterms/book-edit/book-edit.component';
+import { DevisDdMonceauComponent } from './devis/devis-dd-monceau/devis-dd-monceau.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,11 @@ const routes: Routes = [
       {
         path: 'new-ship',
         component: ShipEditComponent,
+        canActivate: [SolGuard]
+      },
+      {
+        path: 'devisddm',
+        component: DevisDdMonceauComponent,
         canActivate: [SolGuard]
       }
     ]
