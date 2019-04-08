@@ -1,0 +1,58 @@
+<section *ngIf="(authService.afAuth.authState | async) as user">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="userFormGroup" (ngSubmit)="updateUser()">
+          <mat-form-field class="person-full-width">
+            <input matInput placeholder="{{ user.displayName}}" formControlName="displayName" />
+            <mat-hint align="start"><strong>Alias</strong></mat-hint>
+          </mat-form-field>
+          <mat-form-field class="person-full-width">
+              <input matInput placeholder="Prénom" formControlName="surname" />
+              <mat-hint align="start"><strong>Prénom</strong></mat-hint>
+            </mat-form-field>
+          <br />
+
+
+          <div  mat-raised-button
+           >
+            <input
+              mat-raised-button
+              type="file"
+              name="file"
+              id="file"
+              (change)="uploadAvatar($event)"
+            />
+            <div [hidden]="!uploadPercent">
+              <mat-progress-bar
+                mode="determinate"
+                value="{{ uploadPercent | async }}"
+              ></mat-progress-bar>
+            </div>
+            <div [hidden]="!view"><img [src]="avatar || '//:0'" /></div>
+          </div>
+          <br />
+
+          <mat-form-field>
+            <mat-select placeholder="Language" formControlName="language">
+              <mat-option>None</mat-option>
+              <mat-option >tutu</mat-option>
+              <mat-option >tata</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br />
+          <div align="right">
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="!userFormGroup.valid"
+            >
+              Update Profile
+            </button>
+            <button mat-raised-button type="reset" (click)="revert()" mat-button>Cancel</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </section>

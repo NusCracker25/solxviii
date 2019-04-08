@@ -118,17 +118,46 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+      <!-- toolbar shows the name of the site on the left hand side then on the far right the user log/pref menu -->
       <span>solxviii</span> <span class="spacer"></span>
-      <div *ngIf="(auth.afAuth.authState | async) as user; else showLogin">
-        <span>Hi {{ user.displayName }}!</span>
-        <button mat-button (click)="auth.logout()">Logout</button>
-      </div>
-      <ng-template #showLogin>
-        <button mat-button (click)="auth.login()">Login</button>
-      </ng-template>
+
+      <!-- welcome user -->
+      <div *ngIf="(auth.afAuth.authState | async) as user; else guest">
+          <span>Hi {{ user.displayName }}!</span>
+        </div>
+        <ng-template #guest>
+            <span>Hi Guest!</span>
+        </ng-template>
+
+      <!-- user menu and action depending on login status -->
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item *ngIf="(auth.afAuth.authState | async); else userLogin" (click)="auth.logout()">Logout</button>
+        <ng-template #userLogin>
+            <button mat-menu-item (click)="auth.login()">
+                <mat-icon>exit_to_app</mat-icon>
+              Login</button>
+        </ng-template>
+        <button mat-menu-item *ngIf="(auth.afAuth.authState | async)"
+        [routerLink]="['./settings']"
+        routerLinkActive="router-link-active"
+        >
+            <mat-icon>settings</mat-icon>
+            Settings</button>
+        <button mat-menu-item>
+          <mat-icon>contact_support</mat-icon>
+          Help</button>
+        <button mat-menu-item> <mat-icon>copyright</mat-icon>Credits</button>
+      </mat-menu>
+
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+
+
     </mat-toolbar>
-    <div class="vintage-paper">
+    <!-- this is where we put the actual content of the app -->
     <router-outlet></router-outlet>
-  </div>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

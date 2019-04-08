@@ -34,7 +34,7 @@
               "src/theme.scss"
             ],
             "scripts": [
-              "node_modules/aframe/dist/aframe-master.js"
+
             ]
           },
           "configurations": {

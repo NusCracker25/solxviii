@@ -30,7 +30,7 @@ import { FeatureModule } from './feature/feature.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule,
+    SharedModule
     // FeatureModule
   ],
   schemas: [

@@ -9,6 +9,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 // import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { SoltermsModule } from './solterms/solterms.module';
 import { DevisModule } from './devis/devis.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [MainNavComponent],
@@ -23,7 +24,8 @@ import { DevisModule } from './devis/devis.module';
     // MatListModule,
     SharedModule,
     SoltermsModule,
-    DevisModule
+    DevisModule,
+    AdminModule
   ],
   exports: [
     MainNavComponent

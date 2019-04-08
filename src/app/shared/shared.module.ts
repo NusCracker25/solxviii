@@ -6,7 +6,8 @@ import { MaterialModule } from './material/material.module';
 
 import { FormsModule,
 ReactiveFormsModule } from '@angular/forms';
-import { ThreeDModule } from './threeD/threeD.module';
+
+import { MeasurePipe } from './pipes/measure.pipe';
 
 
 @NgModule({
@@ -25,8 +26,9 @@ import { ThreeDModule } from './threeD/threeD.module';
     RouterModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MeasurePipe
   ],
-  declarations: []
+  declarations: [MeasurePipe]
 })
 export class SharedModule { }

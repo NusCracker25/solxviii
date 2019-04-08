@@ -16,6 +16,7 @@ import { ShipEditComponent } from './solterms/ship-edit/ship-edit.component';
 import {SolGuard} from './solterms/sol-guard';
 import { BookEditComponent } from './solterms/book-edit/book-edit.component';
 import { DevisDdMonceauComponent } from './devis/devis-dd-monceau/devis-dd-monceau.component';
+import { UserProfileComponent } from './admin/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,10 @@ const routes: Routes = [
       {
         path: 'ship/:id',
         component: ShipDetailComponent
+      },
+      {
+        path: 'settings',
+        component: UserProfileComponent
       },
       {
         path: 'new-ship',
