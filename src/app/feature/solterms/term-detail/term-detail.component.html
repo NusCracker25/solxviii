@@ -59,7 +59,7 @@
       </ng-template>
       <p>
         <small>
-          Created by {{ term.authors }} &bull; on {{ term.creation | date: "fullDate" }}</small
+          Created by {{ usersService.getDisplayName(temr) }} &bull; on {{ term.creation | date: "fullDate" }}</small
         >
       </p>
     </div>

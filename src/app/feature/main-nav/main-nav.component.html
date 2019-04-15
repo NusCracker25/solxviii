@@ -20,30 +20,11 @@
     <mat-nav-list>
       <a
         mat-list-item
-        [routerLink]="['./construction']"
-        routerLinkActive="router-link-active"
-      >
-        <mat-icon matListIcon>home</mat-icon>
-        <span>All</span></a
-      >
-
-      <a
-        mat-list-item
         [routerLink]="['./terms']"
         routerLinkActive="router-link-active"
       >
         <mat-icon matListIcon>view_list</mat-icon>
         <span>Glossaire</span></a
-      >
-      <a
-        *ngIf="(auth.afAuth.authState | async) as user"
-        mat-list-item
-        [routerLink]="['/home/new-term']"
-        routerLinkActive="router-link-active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <mat-icon matListIcon>add</mat-icon>
-        <span>add term</span></a
       >
       <a
         mat-list-item
@@ -53,7 +34,7 @@
         <mat-icon matListIcon>library_books</mat-icon>
         <span>Library</span></a
       >
-      <a
+      <!-- <a
         *ngIf="(auth.afAuth.authState | async) as user"
         mat-list-item
         [routerLink]="['./new-book']"
@@ -61,7 +42,7 @@
       >
         <mat-icon matListIcon>library_add</mat-icon>
         <span>add book</span></a
-      >
+      > -->
       <a
         mat-list-item
         [routerLink]="['./people']"
@@ -71,7 +52,7 @@
         <span>Hall of Fame</span></a
       >
       <a
-        *ngIf="(auth.afAuth.authState | async) as user"
+        *ngIf="(auth.afAuth.authState | async)"
         mat-list-item
         [routerLink]="['./new-person']"
         [routerLinkActive]="'router-link-active'"
@@ -88,14 +69,13 @@
         <span>Arsenal</span></a
       >
       <a
-        *ngIf="(auth.afAuth.authState | async) as user"
-        mat-list-item
-        [routerLink]="'./new-ship'"
-        [routerLinkActive]="'router-link-active'"
-      >
-        <mat-icon matListIcon>add</mat-icon>
-        <span>add ship</span></a
-      >
+      mat-list-item
+      [routerLink]="['./blog']"
+      [routerLinkActive]="'router-link-active'"
+    >
+      <mat-icon matListIcon>notes</mat-icon>
+      <span>Articles</span></a
+    >
       <a
       *ngIf="(auth.afAuth.authState | async) as user"
       mat-list-item
@@ -120,6 +100,18 @@
       </button>
       <!-- toolbar shows the name of the site on the left hand side then on the far right the user log/pref menu -->
       <span>solxviii</span> <span class="spacer"></span>
+
+      <!-- search tool : to be replaced by an actual search component -->
+      <form class="search-form">
+
+        <mat-form-field class="example-full-width"
+        floatLabel="never">
+          <input type="text" matInput placeholder="Search">
+       </mat-form-field>
+        <button mat-icon-button >
+          <mat-icon>search</mat-icon>
+        </button>
+      </form>
 
       <!-- welcome user -->
       <div *ngIf="(auth.afAuth.authState | async) as user; else guest">

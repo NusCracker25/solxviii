@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { TermsService } from '../terms.service';
 import { Term } from '../term';
 import { AuthService } from '@core/auth.service';
+import { UsersService } from '@core/users.service';
 
 @Component({
   selector: 'sol-term-detail',
@@ -18,7 +19,8 @@ export class TermDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private termService: TermsService,
-    public auth: AuthService
+    public auth: AuthService,
+    public usersService: UsersService
   ) { }
 
   ngOnInit() {

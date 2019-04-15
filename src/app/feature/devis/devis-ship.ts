@@ -25,7 +25,7 @@ export class DevisShip {
 // au defTus des tins ou chantiers qui la portent , eft de 1 ligne
 // 6 points par pied de fa longueur : la quille a cette
 // même hauteur dans toute fa longeur.
-    this.H_quille = this.L_quille/8 ;
+    this.H_quille = this.L_quille / 8 * this.pouce2metre ;
 
 
   }
