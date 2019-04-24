@@ -24,8 +24,6 @@ export class PersonDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getTerm();
-    console.log(this.person);
-    console.log(this.route);
   }
 
   getTerm() {
