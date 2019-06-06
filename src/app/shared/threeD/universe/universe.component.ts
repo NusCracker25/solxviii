@@ -32,7 +32,7 @@ export class UniverseComponent implements OnInit , AfterViewInit {
     return this.canvasRef.nativeElement;
   }
 
-  @ViewChild('cvsView')
+  @ViewChild('cvsView', { static: true })
   private canvasRef: ElementRef;
 
    /**

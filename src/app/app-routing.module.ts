@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './feature/feature.module#FeatureModule'
+    loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule)
   },
   // {
   //   path: '404',
